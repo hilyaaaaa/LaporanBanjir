@@ -1,35 +1,28 @@
-<div class="laporan-card">
 
-    <h3>{{ $item['lokasi'] }}</h3>
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>{{ $item->nama_pelapor }}</h5>
 
-    <p>
-        <strong>Nama Pelapor:</strong>
-        {{ $item['nama'] }}
-    </p>
+        <p>Lokasi: {{ $item->lokasi }}</p>
 
-    <p>
-        <strong>Tinggi Genangan:</strong>
-        {{ $item['tinggi'] }} cm
-    </p>
+        <p>
+            Tinggi Genangan:
+            {{ $item->tinggi_genangan }} cm
+        </p>
 
-    @if ($item['tinggi'] < 30)
+        <p>
+            Tanggal Kejadian:
+            {{ $item->tanggal_kejadian }}
+        </p>
 
-        <span class="status waspada">
-            Waspada
-        </span>
-
-    @elseif ($item['tinggi'] <= 70)
-
-        <span class="status siaga">
-            Siaga
-        </span>
-
-    @else
-
-        <span class="status awas">
-            Awas
-        </span>
-
-    @endif
-
+        <p>Status:
+            @if ($item->tinggi_genangan < 30)
+                Waspada
+            @elseif ($item->tinggi_genangan <= 70)
+                Siaga
+            @else
+                Awas
+            @endif
+        </p>
+    </div>
 </div>
