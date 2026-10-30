@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -29,15 +30,43 @@
             margin-bottom: 10px;
         }
 
+        header p {
+            margin-bottom: 15px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
         nav a {
             color: white;
             text-decoration: none;
-            margin-right: 20px;
             font-weight: bold;
         }
 
         nav a:hover {
             text-decoration: underline;
+        }
+
+        nav form {
+            display: inline;
+        }
+
+        nav button {
+            background-color: #1e40af;
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        nav button:hover {
+            background-color: #1d4ed8;
         }
 
         main {
@@ -142,10 +171,24 @@
 <header>
     <h1>LaporBanjir</h1>
     <p>Sistem Pelaporan Banjir BPBD Kabupaten Bandung</p>
+      
+<nav>
+    <a href="{{ route('form') }}">Form Pelaporan</a>
 
-    <nav>
-        <a href="{{ route('form') }}">Form Pelaporan</a>
+    @guest
+        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Register</a>
+    @endguest
+
+    @auth
         <a href="{{ route('laporan') }}">Daftar Laporan</a>
+        <a href="{{ route('profil') }}">Profil Petugas</a>
+
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @endauth
     </nav>
 </header>
 
