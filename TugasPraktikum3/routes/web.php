@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -11,7 +10,7 @@ Route::get('/', function () {
     return redirect()->route('form');
 });
 
-// Form pelaporan (bisa diakses tanpa login)
+// Form pelaporan masyarakat (tanpa login)
 Route::get('/form', [LaporanController::class, 'form'])->name('form');
 Route::post('/konfirmasi', [LaporanController::class, 'konfirmasi'])->name('konfirmasi');
 
@@ -23,13 +22,17 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.proses');
 
-// Halaman khusus petugas
+// Halaman khusus petugas (wajib login)
 Route::middleware('auth')->group(function () {
-    Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
 
+    // CRUD laporan menggunakan Resource Controller
+    Route::resource('laporan', LaporanController::class);
+
+    // Profil
     Route::get('/profil', function () {
         return view('profil');
     })->name('profil');
 
+    // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

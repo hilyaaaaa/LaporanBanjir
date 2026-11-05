@@ -10,8 +10,14 @@ class Laporan extends Model
 
     protected $fillable = [
         'nama_pelapor',
+        'no_hp',
         'lokasi',
+        'kecamatan',
+        'tinggi_air',
         'tinggi_genangan',
         'tanggal_kejadian',
+        'keterangan',
+        'foto',
+        'status',
     ];
 }
